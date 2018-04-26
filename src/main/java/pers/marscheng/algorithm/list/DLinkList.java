@@ -1,6 +1,6 @@
 package pers.marscheng.algorithm.list;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 带头结点的双链表
@@ -58,7 +58,7 @@ public class DLinkList<E> {
      * @param data 数据
      */
     private void headInset(E data) {
-        Node<E> node = new Node<E>(data, tail, head);
+        Node<E> node = new Node<E>(data, head.next, head);
         head.next = node;
     }
 
@@ -87,7 +87,7 @@ public class DLinkList<E> {
      * @param datas 数据
      * @param type  方式
      */
-    public void createList(ArrayList<E> datas, String type) {
+    public void createList(List<E> datas, String type) {
         //用头插法构建
         if (type.equals("head")) {
             for (E item : datas) {
@@ -103,9 +103,12 @@ public class DLinkList<E> {
     /**
      * 打印链表
      */
-    public void printList(){
+    public void printList() {
         Node<E> node = head.next;
-        for()
+        while (node != null) {
+            System.out.println(node.data);
+            node = node.next;
+        }
     }
 
 
