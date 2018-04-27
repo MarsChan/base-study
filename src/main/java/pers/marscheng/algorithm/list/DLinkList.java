@@ -127,6 +127,7 @@ public class DLinkList<E> {
             index++;
             if(node.data.equals(data)){
                 indexs.add(index);
+
             }
         }
         return indexs;
