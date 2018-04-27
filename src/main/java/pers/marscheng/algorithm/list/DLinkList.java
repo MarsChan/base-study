@@ -1,5 +1,6 @@
 package pers.marscheng.algorithm.list;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -15,19 +16,19 @@ public class DLinkList<E> {
      *
      * @param <E>
      */
-    private static class Node<E> {
+    public class Node<E> {
         /**
          * 数据
          */
-        E data;
+        public E data;
         /**
          * 下一个节点
          */
-        Node<E> next;
+        public Node<E> next;
         /**
          * 上一个节点
          */
-        Node<E> prior;
+        public Node<E> prior;
 
         public Node(E data, Node<E> next, Node<E> prior) {
             this.data = data;
@@ -39,12 +40,12 @@ public class DLinkList<E> {
     /**
      * 头结点
      */
-    private Node<E> head;
+    public Node<E> head;
 
     /**
      * 尾节点
      */
-    private Node<E> tail;
+    public Node<E> tail;
 
     //构造一个空链表
     public DLinkList() {
@@ -101,14 +102,80 @@ public class DLinkList<E> {
     }
 
     /**
+     * 根据特定位置找到节点
+     * @param index 位置
+     * @return
+     */
+    public Node<E> findByIndex(int index){
+        Node<E> node = head;
+        for(int i = 0;i<index;i++){
+            node = node.next;
+        }
+        return node;
+    }
+
+    /**
+     * 根据值查找元素位置
+     * @param data 元素值
+     * @return 索引列表
+     */
+    public List<Integer> findByData(E data){
+        List<Integer> indexs = new LinkedList<Integer>();
+        Node<E> node = head;
+        int index = 0;
+        while((node = node.next) != null){
+            index++;
+            if(node.data.equals(data)){
+                indexs.add(index);
+            }
+        }
+        return indexs;
+    }
+
+    /**
+     * 向特定位置插入数据
+     * @param data 数据
+     * @param index 位置
+     */
+    public void insertByIndex(E data, int index){
+        Node<E> node = findByIndex(index);
+        Node<E> newNode = new Node<E>(data,null,null);
+        newNode.next = node;
+        newNode.prior = node.prior;
+        node.prior.next = newNode;
+        node.prior= newNode;
+
+    }
+
+    /**
+     * 删除指定链表节点
+     * @param index
+     */
+    public void deleteByIndex(int index){
+        Node<E> node = findByIndex(index);
+        node.prior.next = node.next;
+        node.next.prior = node.prior;
+    }
+
+    /**
+     * 修改特定节点的数据
+     * @param data 数据
+     * @param index 位置
+     */
+    public void updateByIndex(E data,int index){
+        Node<E> node = findByIndex(index);
+        node.data = data;
+    }
+    /**
      * 打印链表
      */
     public void printList() {
         Node<E> node = head.next;
         while (node != null) {
-            System.out.println(node.data);
+            System.out.print(node.data);
             node = node.next;
         }
+        System.out.println("\n=========我是分割线===========");
     }
 
 
