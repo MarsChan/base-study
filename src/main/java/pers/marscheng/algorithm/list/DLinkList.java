@@ -167,6 +167,33 @@ public class DLinkList<E> {
         Node<E> node = findByIndex(index);
         node.data = data;
     }
+
+    /**
+     * 将链表逆序
+     * 因为加入了头结点,所以这块逆序要特别注意下,很可能不小心就会漏了头结点,
+     * 而且头指针变成为指针也要注意next要为空,否则会形成循环链表
+     */
+    public void reverse(){
+        //从头结点开始逆置
+        Node<E> prev = head;
+        head = head.next;
+        Node<E> next = head.next;
+        //头指针要作为尾指针,next指向空,否则会出现循环链表
+        head.next = null;
+        while(next != null){
+            prev = head;
+            head = next;
+            next = next.next;
+            head.next = prev;
+            head.prior = null;
+            prev.prior = head;
+
+        }
+        //补充头结点
+        prev = head;
+        head = new Node<E>(null,prev,null);
+        prev.prior = head;
+    }
     /**
      * 打印链表
      */

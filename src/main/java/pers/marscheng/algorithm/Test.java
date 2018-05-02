@@ -35,6 +35,9 @@ public class Test {
         //删除数据
         linkList.deleteByIndex(3);
         linkList.printList();
+        //双链表逆置
+        linkList.reverse();
+        linkList.printList();
 
 
 
