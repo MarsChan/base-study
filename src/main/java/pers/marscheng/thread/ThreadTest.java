@@ -14,9 +14,36 @@ public class ThreadTest extends Thread {
     }
 
     @Override
-    public void run(){
-        for(int i=0 ;i<1000000;i++){
-            System.out.println(name+"-"+i);
+    public void run() {
+        if (this.name.equals("t1")) {
+            this.method1();
+        } else {
+            this.method2();
         }
     }
+
+    int a = 0;
+    volatile int b = 0;
+
+    public void method1() {
+        int r2 = a;
+        b = 1;
+        System.out.println("r2=" + r2);
+    }
+
+    public void method2() {
+        int r1 = b;
+        a = 2;
+        System.out.println("r1=" + r1);
+    }
+
+    public static void main(String[] args) {
+        ThreadTest t1 = new ThreadTest("t1");
+        ThreadTest t2 = new ThreadTest("t2");
+
+        t1.start();
+        t2.start();
+
+    }
+
 }

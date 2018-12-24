@@ -54,6 +54,16 @@ public class MultiThreadNIOEchoServer {
             EchoClient echoClient = (EchoClient) sk.attachment();
             echoClient.enqueue(bb);
             System.out.print("=========receive==========");
+            int i= 0;
+            //读取buffer中数据
+            //1.逐个读取
+            byte[] datas = new byte[100];
+            while(bb.hasRemaining()){
+                datas[i] = bb.get();
+                i++;
+            }
+            System.out.println(new String(datas));
+            //全部返回
             System.out.println(new String(bb.array()));
             sk.interestOps(SelectionKey.OP_READ | SelectionKey.OP_WRITE);
             selector.wakeup();
@@ -73,7 +83,7 @@ public class MultiThreadNIOEchoServer {
         // 注册感兴趣的事件，此处对accpet事件感兴趣
         SelectionKey acceptKey = ssc.register(selector, SelectionKey.OP_ACCEPT);
         for (; ; ) {
-            System.out.println(selector.select());
+            selector.select();
             Set readyKeys = selector.selectedKeys();
             Iterator i = readyKeys.iterator();
             long e = 0;
