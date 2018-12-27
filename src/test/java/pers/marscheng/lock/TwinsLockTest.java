@@ -1,9 +1,11 @@
 package pers.marscheng.lock;
 
+import com.sun.deploy.util.StringUtils;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 
 /**
@@ -21,17 +23,19 @@ public class TwinsLockTest {
         class Worker extends Thread {
             @Override
             public void run() {
-                lock.lock();
-                try {
-                    while (true) {
-                        Thread.sleep(1000);
+                while (true) {
+                    lock.lock();
+                    try {
+
+                        TimeUnit.SECONDS.sleep(1);
                         System.out.println(Thread.currentThread().getName());
-                        Thread.sleep(1000);
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } finally {
+                        System.out.println("I am in" + Thread.currentThread().getName() + "finally");
+                        lock.unlock();
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    lock.unlock();
                 }
             }
         }
@@ -44,7 +48,7 @@ public class TwinsLockTest {
 
         for (int i = 0; i < 10; i++) {
             try {
-                Thread.sleep(1000);
+                TimeUnit.SECONDS.sleep(1);
                 System.out.println();
             } catch (InterruptedException e) {
                 e.printStackTrace();

@@ -22,14 +22,14 @@ public class JoinTest {
     public static void main(String[] args) throws InterruptedException
     {
 //        AddThread at = new AddThread();
-////        //只是让子线程处于就绪状态，如果子线程是要进行大量耗时运算，主线程往往会在子线程之前结束
-////        at.start();
-////        //会先暂停主线程，等待at子线程执行完之后才会继续执行
-////        at.join();
-////        System.out.println(i);
+//        //只是让子线程处于就绪状态，如果子线程是要进行大量耗时运算，主线程往往会在子线程之前结束
+//        at.start();
+//        //会先暂停主线程，等待at子线程执行完之后才会继续执行
+//        at.join();
+//        System.out.println(i);
 
-        ThreadTest t1 = new ThreadTest("A");
-        ThreadTest t2 = new ThreadTest("B");
+        ThreadTest t1 = new ThreadTest("t1");
+        ThreadTest t2 = new ThreadTest("t2");
 
         t1.start();
         //在这个位置才能让t2阻塞，因为还没执行到t2

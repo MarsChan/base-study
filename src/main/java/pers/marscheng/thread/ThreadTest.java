@@ -29,6 +29,9 @@ public class ThreadTest extends Thread {
         int r2 = a;
         b = 1;
         System.out.println("r2=" + r2);
+        while (true)
+            ;
+
     }
 
     public void method2() {
