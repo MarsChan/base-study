@@ -1,4 +1,4 @@
-package pers.marscheng.base;
+package pers.marscheng.java8;
 
 import java.util.ArrayList;
 

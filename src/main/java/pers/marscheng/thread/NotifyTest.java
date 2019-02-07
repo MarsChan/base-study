@@ -1,60 +1,43 @@
 package pers.marscheng.thread;
 
-import java.util.ArrayList;
-
 /**
  * @program: base-study
  * @description: notify测试
  * @author: MarsCheng
  * @create: 2019-02-03 10:38
  **/
-public class NotifyTest {
-    public static void main(String[] args){
-         final Thread t1 = new Thread(){
-           int[] arrys = {1,3,5,7,9};
+public class NotifyTest implements Runnable {
+    int i = 1;
 
-            @Override
-            public void run() {
-                for (int i:arrys){
-                    System.out.print(i);
-                    try {
-                        Thread.currentThread().wait();
 
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                Thread.currentThread().interrupt();
-            }
-        };
-
-        Thread t2 = new Thread(){
-            int[] arrys = {2,4,6,8,10};
-
-            @Override
-            public void run() {
-                for (int i:arrys){
-                    System.out.print(i);
-                    try {
-                        Thread.currentThread().wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                Thread.currentThread().interrupt();
-            }
-        };
+    public static void main(String[] args) {
+        NotifyTest test = new NotifyTest();
+        Thread t1 = new Thread(test);
+        Thread t2 = new Thread(test);
 
         t1.start();
         t2.start();
 
-        while (!(t1.isInterrupted())){
-            t1.notify();
-        }
 
-        while (!(t2.isInterrupted())){
-            t2.notify();
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            synchronized (this) {
+                this.notify();
+                if (i <= 100) {
+                    String threadName = Thread.currentThread().getName();
+                    System.out.println(threadName + ":" + i);
+                    i++;
+                    try {
+                        this.wait();
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
     }
 }
