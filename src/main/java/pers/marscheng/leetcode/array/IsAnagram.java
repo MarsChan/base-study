@@ -1,4 +1,4 @@
-package pers.marscheng.leetcode;
+package pers.marscheng.leetcode.array;
 
 import java.util.Arrays;
 
