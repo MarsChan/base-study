@@ -43,7 +43,7 @@ public class Piped {
             while(true){
                 try {
                     if ((receive=in.read())!=-1)
-                        System.out.println(receive);
+                        System.out.print((char) receive);
 
                 } catch (IOException e) {
                     e.printStackTrace();
