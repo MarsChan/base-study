@@ -1,4 +1,4 @@
-package pers.marscheng.thread.pool;
+package pers.marscheng.thread.connectionpool;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

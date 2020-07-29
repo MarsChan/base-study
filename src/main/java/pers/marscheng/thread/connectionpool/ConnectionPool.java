@@ -1,4 +1,4 @@
-package pers.marscheng.thread.pool;
+package pers.marscheng.thread.connectionpool;
 
 import java.sql.Connection;
 import java.util.LinkedList;
