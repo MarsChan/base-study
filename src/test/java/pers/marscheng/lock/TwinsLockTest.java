@@ -1,9 +1,6 @@
 package pers.marscheng.lock;
 
-import com.sun.deploy.util.StringUtils;
 import org.junit.Test;
-import org.junit.Before;
-import org.junit.After;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
@@ -43,6 +40,7 @@ public class TwinsLockTest {
         for (int i = 0; i < 10; i++) {
             Worker worker = new Worker();
             worker.setDaemon(true);
+            worker.setName("thread"+i);
             worker.start();
         }
 
