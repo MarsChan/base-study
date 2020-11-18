@@ -12,10 +12,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ConcurrentHashMapDemo {
     public static void main(String[] args){
         Map<String, String> map = new ConcurrentHashMap<>();
-        map.computeIfAbsent("AaAa",
-                (String key) -> {
-                    map.put("BBBB", "value");
-                    return "value";
-                });
+        //map.computeIfAbsent("AaAa",
+        //        (String key) -> {
+        //            map.put("BBBB", "value");
+        //            return "value";
+        //        });
+        map.put("1","hh");
+
     }
 }
